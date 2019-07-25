@@ -19,6 +19,7 @@ import pdlist.source.threatcrowd as tc
 import pdlist.source.dnsdumpster as dd
 import pdlist.source.certspotter as cs
 import pdlist.source.hackertarget as ht
+from pdlist.utils import polish_subdomain_strings, remove_unrelated_domains
 
 
 __all__ = ('main',)
@@ -37,13 +38,6 @@ A passive domain sublister
 Developed by gnc
     """)
 
-
-def polish_subdomain_strings(subdomains):
-    subdomains = [item.strip() for item in subdomains]
-    subdomains = [item.rstrip('\.') for item in subdomains]
-    subdomains = [re.sub("^.* ", "", item) for item in subdomains]
-    subdomains = [re.sub("^[\.\*]\.", "", item) for item in subdomains]
-    return subdomains
         
 
 def main():
@@ -58,6 +52,14 @@ def main():
         default=[],
         type=str,
         nargs='+',
+        )
+    parser.add_argument(
+        "-s","--strict",
+        dest='is_strict',
+        action='store_true',
+        help="Enables strict mode, where only proper (and not also related)\
+        subdomains will be saved",
+        default=False,
         )
     parser.add_argument(
         "-o","--output",
@@ -98,6 +100,10 @@ def main():
 
 
     subdomains = polish_subdomain_strings(subdomains)
+
+    if args.is_strict:
+        subdomains = remove_unrelated_domains(subdomains, domains)
+
     subdomains = list(set(subdomains))
     print()
     print()

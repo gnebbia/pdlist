@@ -66,6 +66,20 @@ We can save the output in a text file by doing:
 pdlist example.com -o example-list.txt
 ```
 
+Notice that by default pdlist will also output hostnames which may not really
+be proper subdomains of the specified domains, and this happens because those
+subdomains are still related to the specified domains.
+
+If we want to only output proper subdomains we can enable the strict mode by
+doing:
+```shs
+pdlist example.com --strict
+```
+
+A usage example in the gif below:
+![](img/pdlist_demo.gif)
+
+
 
 ## NOTES
 
