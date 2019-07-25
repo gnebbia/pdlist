@@ -37,3 +37,8 @@ def find(key, dictionary):
                 for d in v:
                     for result in find(key, d):
                         yield result
+
+def clean_domain_strings(domains):
+    domains = [item.rstrip('\/') for item in domains]
+    domains = [re.sub("(http://|https://)", "", item) for item in domains]
+    return domains

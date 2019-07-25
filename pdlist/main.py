@@ -19,7 +19,9 @@ import pdlist.source.threatcrowd as tc
 import pdlist.source.dnsdumpster as dd
 import pdlist.source.certspotter as cs
 import pdlist.source.hackertarget as ht
-from pdlist.utils import polish_subdomain_strings, remove_unrelated_domains
+from pdlist.utils import (polish_subdomain_strings,
+                         remove_unrelated_domains,
+                         clean_domain_strings)
 
 
 __all__ = ('main',)
@@ -73,7 +75,7 @@ def main():
 
     args = parser.parse_args()
     subdomains = []
-    domains = args.domains
+    domains = clean_domain_strings(args.domains)
 
     print('\033[94m[*] \033[0m The analyzed domains will be: '+ ' '.join(domains))
 
