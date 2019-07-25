@@ -21,7 +21,9 @@ def parse(domains):
     for d in domains:
         url = 'https://www.threatcrowd.org/searchApi/v2/domain/report/?domain={}'.format(d)
         resp = requests.get(url)
-        subdomains += (json.loads(resp.text)['subdomains'])
+        json_resp = json.loads(resp.text)
+        if 'subdomains' in json_resp.keys():
+            subdomains += json_resp['subdomains']
     return subdomains
 
 

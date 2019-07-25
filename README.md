@@ -15,7 +15,7 @@ Version: 0.1.0
 pdlist is a passive subdomain finder written in python. This tool can be used 
 effectively to collect information about a domain without ever sending a 
 single packet to any of its hosts.
-So basically given a domain like "example.com" it will find all the hosts which
+Given a domain like "example.com" it will find all the hosts which
 have a hostname `<something>.example.com` or URLs strictly related to example.com.
 
 In order to collect informations about subdomains the software queries different
@@ -79,6 +79,7 @@ package with a `parse(domains)` method.
 
 ## TODO
 
+* Fix bug:can't provide domain names with http(s):// notation
 * Modify the code to work in asynchrounous mode
 * Generate fancy html reports
 * Add more passive recon sources
