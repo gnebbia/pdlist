@@ -86,8 +86,8 @@ A usage example in the gif below:
 This is a minimalist passive domain finder, the aim of this project is to have
 few dependencies, small code footprint and easily extensible.
 
-If you want to extend the code it is enough to add a module in the source/
-package with a `parse(domains)` method.
+If you want to extend the code it is enough to add a module in the `source`
+package with a `def parse(domains)` method.
 
 
 
