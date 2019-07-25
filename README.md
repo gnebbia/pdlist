@@ -1,9 +1,12 @@
 # pdlist.  A passive subdomain finder
 
 
-Author: gnc 
+Author: gnc
+
 Copyright: © 2019, gnc.
+
 Date: 2019-07-25
+
 Version: 0.1.0
 
 
