@@ -13,20 +13,8 @@ DnsDumpster parser
 """
 import requests
 import json
+from pdlist.utils import find
 from dnsdumpster.DNSDumpsterAPI import DNSDumpsterAPI
-
-def find(key, dictionary):
-    if isinstance(dictionary,dict):
-        for k, v in dictionary.items():
-            if k == key:
-                yield v
-            elif isinstance(v, dict):
-                for result in find(key, v):
-                    yield result
-            elif isinstance(v, list):
-                for d in v:
-                    for result in find(key, d):
-                        yield result
 
 
 
