@@ -106,7 +106,7 @@ def main():
     if args.is_strict:
         subdomains = remove_unrelated_domains(subdomains, domains)
 
-    subdomains = list(set(subdomains))
+    subdomains = list(set([x for x in subdomains if x]))
     print()
     print()
 
