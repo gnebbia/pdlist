@@ -10,13 +10,15 @@ Main routine of pdlist.
 :Copyright: © 2019, gnc.
 :License: BSD (see /LICENSE).
 """
+import re
 import argparse
-import pdlist.source.threatcrowd as tc
-import pdlist.source.hackertarget as ht
-import pdlist.source.dnsdumpster as dd
+import functools
 import pdlist.source.crtsh as cr
-import pdlist.source.certspotter as cs
 import pdlist.source.urlscan as us
+import pdlist.source.threatcrowd as tc
+import pdlist.source.dnsdumpster as dd
+import pdlist.source.certspotter as cs
+import pdlist.source.hackertarget as ht
 
 
 __all__ = ('main',)
@@ -35,6 +37,14 @@ A passive domain sublister
 Developed by gnc
     """)
 
+
+def polish_subdomain_strings(subdomains):
+    subdomains = [item.strip() for item in subdomains]
+    subdomains = [item.rstrip('\.') for item in subdomains]
+    subdomains = [re.sub("^.* ", "", item) for item in subdomains]
+    subdomains = [re.sub("^[\.\*]\.", "", item) for item in subdomains]
+    return subdomains
+        
 
 def main():
     """Main routine of pdlist."""
@@ -71,6 +81,9 @@ def main():
     print('\033[32m[+] \033[0m Searching on hackertarget...')
     subdomains += ht.parse(domains)
 
+    print('\033[32m[+] \033[0m Searching on urlscan...')
+    subdomains += us.parse(domains)
+
     print('\033[32m[+] \033[0m Searching on dnsdumpster...')
     subdomains += dd.parse(domains)
     
@@ -82,10 +95,17 @@ def main():
 
     print('\033[32m[+] \033[0m Printing domain list')
     print()
-    
+
+
+    subdomains = polish_subdomain_strings(subdomains)
+    subdomains = list(set(subdomains))
+    print()
+    print()
+
+
     if args.outputfile is not None:
-        args.outputfile.write('\n'.join(list(set(subdomains))))
-    for x in list(set(subdomains)):
+        args.outputfile.write('\n'.join(subdomains))
+    for x in subdomains:
         print(x)
 
 

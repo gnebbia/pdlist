@@ -6,7 +6,7 @@
 # See /LICENSE for licensing information.
 
 """
-Threatcrowd parser
+DnsDumpster parser
 
 :Copyright: © 2019, Giuseppe Nebbione.
 :License: BSD (see /LICENSE).

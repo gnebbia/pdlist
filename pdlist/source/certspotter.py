@@ -5,7 +5,7 @@
 # See /LICENSE for licensing information.
 
 """
-Threatcrowd parser
+certspotter parser
 
 :Copyright: © 2019, Giuseppe Nebbione.
 :License: BSD (see /LICENSE).
