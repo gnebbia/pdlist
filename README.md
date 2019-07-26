@@ -93,10 +93,9 @@ package with a `def parse(domains)` method.
 
 ## TODO
 
-* Fix bug:can't provide domain names with http(s):// notation
+* Add more passive recon sources
 * Modify the code to work in asynchrounous mode
 * Generate fancy html reports
-* Add more passive recon sources
 
 ## COPYRIGHT
 
