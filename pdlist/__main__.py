@@ -10,7 +10,6 @@ Main routine of pdlist.
 :Copyright: © 2019, gnc.
 :License: BSD (see /LICENSE).
 """
-import argparse
 from pdlist.main import main
 
 

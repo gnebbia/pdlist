@@ -66,7 +66,7 @@ def main():
     parser.add_argument(
         "-o","--output",
         dest='outputfile',
-        help="Save results to standard output",
+        help="Save results to the specified file",
         default=None,
         nargs='?',
         type=argparse.FileType('w'),
