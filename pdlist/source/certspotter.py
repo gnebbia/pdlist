@@ -10,20 +10,26 @@ certspotter parser
 :Copyright: © 2019, Giuseppe Nebbione.
 :License: BSD (see /LICENSE).
 """
-import requests
 import json
-
-
+import requests
 
 
 def parse(domains):
+    """
+    This function performs a request to certspotter and after having
+    parsed its output returns a cleaned list of unique domains
+
+    Args:
+    domains -- the list of input domain to query
+
+    Returns:
+    a cleaned list of unique subdomains obtained after querying certspotter
+    """
     subdomains = []
-    for d in domains:
-        url = 'https://certspotter.com/api/v0/certs?domain={}'.format(d)
+    for domain in domains:
+        url = 'https://certspotter.com/api/v0/certs?domain={}'.format(domain)
         json_resp = json.loads(requests.get(url).text)
-        doms = [ e['dns_names'] for e in json_resp ]
-        for s in doms:
-            subdomains += s
+        doms = [e['dns_names'] for e in json_resp]
+        for subs in doms:
+            subdomains += subs
     return list(set(subdomains))
-
-

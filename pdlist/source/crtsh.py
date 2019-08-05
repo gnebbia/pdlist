@@ -10,18 +10,24 @@ crt.sh parser
 :Copyright: © 2019, Giuseppe Nebbione.
 :License: BSD (see /LICENSE).
 """
-import requests
 import json
-
-
+import requests
 
 
 def parse(domains):
+    """
+    This function performs a request to crt.sh and after having
+    parsed its output returns a cleaned list of unique domains
+
+    Args:
+    domains -- the list of input domain to query
+
+    Returns:
+    a cleaned list of unique subdomains obtained after querying crt.sh
+    """
     subdomains = []
-    for d in domains:
-        url = 'https://crt.sh/?q=%%25.{}&output=json'.format(d)
+    for domain in domains:
+        url = 'https://crt.sh/?q=%%25.{}&output=json'.format(domain)
         json_resp = json.loads(requests.get(url).text)
-        subdomains = [ e['name_value'] for e in json_resp ]
+        subdomains = [e['name_value'] for e in json_resp]
     return list(set(subdomains))
-
-

@@ -11,15 +11,24 @@ Hackertarget parser
 :License: BSD (see /LICENSE).
 """
 import requests
-import json
 
 
 def parse(domains):
+    """
+    This function performs a request to hackertarget and after having
+    parsed its output returns a cleaned list of unique domains
+
+    Args:
+    domains -- the list of input domain to query
+
+    Returns:
+    a cleaned list of unique subdomains obtained after querying hackertarget
+    """
     subdomains = []
-    for d in domains:
-        url = 'https://api.hackertarget.com/hostsearch/?q={}'.format(d)
+    for domain in domains:
+        url = 'https://api.hackertarget.com/hostsearch/?q={}'.format(domain)
         resp = requests.get(url)
         lines = resp.text.split()
-        for l in lines:
-            subdomains.append(l.split(',')[0])
+        for line in lines:
+            subdomains.append(line.split(',')[0])
     return subdomains
