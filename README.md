@@ -12,7 +12,7 @@ Version: 0.1.0
 
 ## PURPOSE
 
-pdlist is a passive subdomain finder written in python. This tool can be used 
+pdlist is a passive subdomain finder written in python3. This tool can be used 
 effectively to collect information about a domain without ever sending a 
 single packet to any of its hosts.
 Given a domain like "example.com" it will find all the hosts which
@@ -44,6 +44,10 @@ cd pdlist
 pip install -r requirements.txt
 python setup.py install
 ```
+
+Notice that both pip and python should refer to version 3, so if you are not
+using pyenv as I am doing you should probably substitute `pip` with `pip3` and
+`python` with `python3`.
 
 
 ## USAGE
