@@ -29,6 +29,7 @@ def parse(domains):
     subdomains = []
     for domain in domains:
         results = DNSDumpsterAPI().search(domain)
+        if not results: continue
         subdomains += list(set(find('domain', results['dns_records'])))
         subdomains += list(set(find('reverse_dns', results['dns_records'])))
     return subdomains
