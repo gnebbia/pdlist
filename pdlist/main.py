@@ -10,6 +10,7 @@ Main routine of pdlist.
 :Copyright: © 2019, gnc.
 :License: BSD (see /LICENSE).
 """
+import re
 import argparse
 import pdlist.source.crtsh as cr
 import pdlist.source.urlscan as us
