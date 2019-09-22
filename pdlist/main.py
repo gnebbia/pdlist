@@ -82,7 +82,7 @@ def main():
     for source in sources:
         name = re.sub(r' parser$', '', source.__doc__.strip().split('\n')[0])
         print('\033[32m[+] \033[0m Searching on {}...'.format(name))
-        subdomains += tc.parse(domains)
+        subdomains += source.parse(domains)
 
     print('\033[32m[+] \033[0m Printing domain list')
     print()
