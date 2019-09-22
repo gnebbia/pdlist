@@ -20,6 +20,7 @@ import pdlist.source.hackertarget as ht
 from pdlist.utils import (polish_subdomain_strings,
                           remove_unrelated_domains,
                           clean_domain_strings)
+import re
 
 
 __all__ = ('main',)
@@ -77,23 +78,11 @@ def main():
         '\033[94m[*] \033[0m The analyzed domains will be: ' +
         ' '.join(domains))
 
-    print('\033[32m[+] \033[0m Searching on threatcrowd...')
-    subdomains += tc.parse(domains)
-
-    print('\033[32m[+] \033[0m Searching on hackertarget...')
-    subdomains += ht.parse(domains)
-
-    print('\033[32m[+] \033[0m Searching on urlscan...')
-    subdomains += us.parse(domains)
-
-    print('\033[32m[+] \033[0m Searching on dnsdumpster...')
-    subdomains += dd.parse(domains)
-
-    print('\033[32m[+] \033[0m Searching on crt.sh...')
-    subdomains += cr.parse(domains)
-
-    print('\033[32m[+] \033[0m Searching on certspotter...')
-    subdomains += cs.parse(domains)
+    sources = [tc, ht, us, dd, cr, cs]
+    for source in sources:
+        name = re.sub(r' parser$', '', source.__doc__.strip().split('\n')[0])
+        print('\033[32m[+] \033[0m Searching on {}...'.format(name))
+        subdomains += tc.parse(domains)
 
     print('\033[32m[+] \033[0m Printing domain list')
     print()
