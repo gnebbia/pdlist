@@ -49,9 +49,12 @@ def polish_subdomain_strings(subdomains):
     subdomains -- the list of polished subdomains
     """
     subdomains = [item.strip() for item in subdomains]
+    # remove initial dots if present
     subdomains = [item.rstrip('.') for item in subdomains]
+    # remove strings before space, e.g., 5 mail.example.com -> mail.example.com
     subdomains = [re.sub(r'^.* ', '', item) for item in subdomains]
-    subdomains = [re.sub(r'^[\.\*]\.', '', item) for item in subdomains]
+    # remove strings starting with a dot or a star
+    subdomains = [re.sub(r'^[\.\*]\.?', '', item) for item in subdomains]
     return subdomains
 
 def find(key, dictionary):

@@ -10,6 +10,7 @@ crt.sh parser
 :Copyright: © 2019, Giuseppe Nebbione.
 :License: BSD (see /LICENSE).
 """
+import sys
 import json
 import requests
 
@@ -28,6 +29,10 @@ def parse(domains):
     subdomains = []
     for domain in domains:
         url = 'https://crt.sh/?q=%%25.{}&output=json'.format(domain)
-        json_resp = json.loads(requests.get(url).text)
-        subdomains = [e['name_value'] for e in json_resp]
+        try:
+            json_resp = json.loads(requests.get(url).text)
+            subdomains = [e['name_value'] for e in json_resp]
+        except json.decoder.JSONDecodeError:
+            print("ERROR: crt.sh response may be too long or badly formatted",
+                    file=sys.stderr)
     return list(set(subdomains))
