@@ -19,9 +19,8 @@ import pdlist.source.certspotter as cs
 import pdlist.source.hackertarget as ht
 from pdlist.utils import (polish_subdomain_strings,
                           remove_unrelated_domains,
-                          clean_domain_strings)
-import re
-
+                          clean_domain_strings,
+                          sort_domains)
 
 __all__ = ('main',)
 
@@ -93,6 +92,9 @@ def main():
         subdomains = remove_unrelated_domains(subdomains, domains)
 
     subdomains = list(set([x for x in subdomains if x]))
+
+    subdomains = sort_domains(subdomains)
+
     print()
     print()
 

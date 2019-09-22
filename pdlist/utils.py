@@ -11,6 +11,7 @@ utils functions for pdlist
 :License: BSD (see /LICENSE).
 """
 import re
+from collections import defaultdict
 
 
 def remove_unrelated_domains(subdomains, domains):
@@ -93,4 +94,23 @@ def clean_domain_strings(domains):
     """
     domains = [item.rstrip('/') for item in domains]
     domains = [re.sub(r'(http://|https://)', '', item) for item in domains]
+    return domains
+
+
+def sort_domains(domains):
+    """
+    This function is used to sort the domains in a hierarchical order for
+    readability.
+
+    Args:
+    domains -- the list of input domains
+
+    Returns:
+    domains -- hierarchically sorted list of domains
+    """
+    domainbits = [domain.lower().split('.') for domain in domains]
+    for domain in domainbits:
+        domain.reverse()
+    sorted(domainbits)
+    domains = [('.'.join(reversed(domain))) for domain in sorted(domainbits)]
     return domains
