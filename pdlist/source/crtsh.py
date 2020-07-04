@@ -26,13 +26,17 @@ def parse(domains):
     Returns:
     a cleaned list of unique subdomains obtained after querying crt.sh
     """
+    ua = 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1'
     subdomains = []
     for domain in domains:
-        url = 'https://crt.sh/?q=%%25.{}&output=json'.format(domain)
-        try:
-            json_resp = json.loads(requests.get(url).text)
-            subdomains = [e['name_value'] for e in json_resp]
-        except json.decoder.JSONDecodeError:
-            print("ERROR: crt.sh response may be too long or badly formatted",
-                    file=sys.stderr)
+        url = "https://crt.sh/?q={}&output=json".format(domain)
+        req = requests.get(url, headers={'User-Agent':ua})
+        if req.ok:
+            try:
+                # print(req.content.decode('utf-8'))
+                json_resp = json.loads(req.content.decode('utf-8'))
+                subdomains = [e['name_value'] for e in json_resp]
+            except json.decoder.JSONDecodeError:
+                print("ERROR: crt.sh response may be too long or badly formatted",
+                        file=sys.stderr)
     return list(set(subdomains))

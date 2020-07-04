@@ -27,7 +27,7 @@ setup(name='pdlist',
                    ],
       packages=find_packages(exclude=('tests',)),
       include_package_data=True,
-      install_requires=['dnsdumpster','requests'],
+      install_requires=['dnsdumpster','requests', 'BeautifulSoup4'],
       entry_points={
            'console_scripts':[
                'pdlist = pdlist.main:main',

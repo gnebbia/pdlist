@@ -78,10 +78,18 @@ def main():
         '\033[94m[*] \033[0m The analyzed domains will be: ' +
         ' '.join(domains))
 
+    found_subdomains = []
     sources = [tc, ht, us, dd, cr, cs]
     for source in sources:
         name = re.sub(r' parser$', '', source.__doc__.strip().split('\n')[0])
         print('\033[32m[+] \033[0m Searching on {}...'.format(name))
+        # Decomment here if you want to get the number of extracted
+        # subdomains ...
+
+        # found_subdomains += source.parse(domains)
+        # print('\033[32m[+] \033[0m Found {} subdomains from {}'
+        #         .format(len(found_subdomains), source))
+        # subdomains += found_subdomains
         subdomains += source.parse(domains)
 
     print('\033[32m[+] \033[0m Printing domain list')
