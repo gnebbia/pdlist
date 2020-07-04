@@ -29,7 +29,10 @@ def parse(domains):
     for domain in domains:
         url = 'https://certspotter.com/api/v0/certs?domain={}'.format(domain)
         json_resp = json.loads(requests.get(url).text)
-        doms = [e['dns_names'] for e in json_resp]
-        for subs in doms:
-            subdomains += subs
+        try:
+            doms = [e['dns_names'] for e in json_resp]
+            for subs in doms:
+                subdomains += subs
+        except TypeError:
+            print("\033[93m[*] \033[0m Cert Spotter API: Number of allowed requests exceeded")
     return list(set(subdomains))

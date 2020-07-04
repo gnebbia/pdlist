@@ -67,7 +67,7 @@ def main():
         help="Save results to the specified file",
         default=None,
         nargs='?',
-        type=argparse.FileType('w'),
+        type=argparse.FileType(mode='wt',encoding='utf-8'),
     )
 
     args = parser.parse_args()
@@ -92,19 +92,21 @@ def main():
         # subdomains += found_subdomains
         subdomains += source.parse(domains)
 
-    print('\033[32m[+] \033[0m Printing domain list')
+    print()
+    print('\033[32m[+] \033[0m Printing domain list...')
     print()
 
     subdomains = polish_subdomain_strings(subdomains)
 
     if args.is_strict:
         subdomains = remove_unrelated_domains(subdomains, domains)
-
-    subdomains = list(set([x for x in subdomains if x]))
-
+    
+    # only get unique subdomains strings to avoid duplicates
+    subdomains = list(set(subdomains))
+    
+    # sort subdomains
     subdomains = sort_domains(subdomains)
 
-    print()
     print()
 
     if args.outputfile is not None:

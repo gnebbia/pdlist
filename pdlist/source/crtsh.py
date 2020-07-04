@@ -28,14 +28,15 @@ def parse(domains):
     """
     ua = 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1'
     subdomains = []
+    crt_namevalues = []
     for domain in domains:
         url = "https://crt.sh/?q={}&output=json".format(domain)
         req = requests.get(url, headers={'User-Agent':ua})
         if req.ok:
             try:
-                # print(req.content.decode('utf-8'))
                 json_resp = json.loads(req.content.decode('utf-8'))
-                subdomains = [e['name_value'] for e in json_resp]
+                crt_namevalues = [e['name_value'] for e in json_resp]
+                subdomains += [x for s in crt_namevalues for x in s.split()]
             except json.decoder.JSONDecodeError:
                 print("ERROR: crt.sh response may be too long or badly formatted",
                         file=sys.stderr)
