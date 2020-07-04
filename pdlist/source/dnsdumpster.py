@@ -14,7 +14,6 @@ DnsDumpster parser
 import re
 import requests
 from pdlist.utils import find
-from dnsdumpster.DNSDumpsterAPI import DNSDumpsterAPI
 from bs4 import BeautifulSoup
 
 
@@ -141,7 +140,6 @@ def parse(domains):
     """
     subdomains = []
     for domain in domains:
-        # results = DNSDumpsterAPI().search(domain)
         results = search(domain)
         if not results:
             continue

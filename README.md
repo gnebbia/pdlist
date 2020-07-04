@@ -31,7 +31,7 @@ publicly available websites, which at the moment are:
 pdlist is very user-friendly and lightweight since the only dependencies are
 the following python modules:
 - requests
-- dnsdumpster
+- BeautifulSoup4
 
 
 
