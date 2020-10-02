@@ -53,7 +53,7 @@ using pyenv as I am doing you should probably substitute `pip` with `pip3` and
 ## USAGE
 
 To have a list of subdomains passively of for example
-[example.com](example.com) we can do:
+[example.com](https://example.com/) we can do:
 
 ```sh
 pdlist example.com
