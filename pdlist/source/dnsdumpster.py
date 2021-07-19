@@ -13,6 +13,7 @@ DnsDumpster parser
 """
 import re
 import requests
+import sys
 from pdlist.utils import find
 from bs4 import BeautifulSoup
 
