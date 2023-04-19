@@ -90,7 +90,10 @@ def main():
         # print('\033[32m[+] \033[0m Found {} subdomains from {}'
         #         .format(len(found_subdomains), source))
         # subdomains += found_subdomains
-        subdomains += source.parse(domains)
+        try:
+            subdomains += source.parse(domains)
+        except Exception:
+            next
 
     print()
     print('\033[32m[+] \033[0m Printing domain list...')
