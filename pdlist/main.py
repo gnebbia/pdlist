@@ -14,7 +14,6 @@ import re
 import argparse
 import pdlist.source.crtsh as cr
 import pdlist.source.urlscan as us
-import pdlist.source.threatcrowd as tc
 import pdlist.source.dnsdumpster as dd
 import pdlist.source.certspotter as cs
 import pdlist.source.hackertarget as ht
@@ -79,7 +78,7 @@ def main():
         ' '.join(domains))
 
     found_subdomains = []
-    sources = [tc, ht, us, dd, cr, cs]
+    sources = [ht, us, dd, cr, cs]
     for source in sources:
         name = re.sub(r' parser$', '', source.__doc__.strip().split('\n')[0])
         print('\033[32m[+] \033[0m Searching on {}...'.format(name))
